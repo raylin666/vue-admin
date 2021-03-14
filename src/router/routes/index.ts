@@ -27,6 +27,15 @@ export const RootRoute: AppRouteRecordRaw = {
   },
 };
 
+export const HomeRoute: AppRouteRecordRaw = {
+  path: '/home',
+  name: 'Home',
+  component: () => import('/@/views/dashboard/home/index.vue'),
+  meta: {
+    title: t('routes.dashboard.home'),
+  },
+};
+
 export const LoginRoute: AppRouteRecordRaw = {
   path: '/login',
   name: 'Login',
@@ -37,4 +46,4 @@ export const LoginRoute: AppRouteRecordRaw = {
 };
 
 // Basic routing without permission
-export const basicRoutes = [LoginRoute, RootRoute, ...mainOutRoutes, REDIRECT_ROUTE];
+export const basicRoutes = [LoginRoute, HomeRoute, RootRoute, ...mainOutRoutes, REDIRECT_ROUTE];

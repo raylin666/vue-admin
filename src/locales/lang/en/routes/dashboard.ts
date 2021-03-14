@@ -1,6 +1,6 @@
 export default {
   dashboard: 'Dashboard',
-  welcome: 'Home',
+  home: 'Home',
   workbench: 'Workbench',
   analysis: 'Analysis',
 };

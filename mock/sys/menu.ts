@@ -5,9 +5,9 @@ import { MockMethod } from 'vite-plugin-mock';
 const dashboardRoute = {
   path: '/home',
   name: 'Home',
-  component: '/dashboard/welcome/index',
+  component: '/dashboard/home/index',
   meta: {
-    title: 'routes.dashboard.welcome',
+    title: 'routes.dashboard.home',
     affix: true,
     icon: 'bx:bx-home',
   },
