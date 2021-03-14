@@ -12,4 +12,12 @@ export interface UserInfo {
   real_username: string;
   // 介绍
   desc?: string;
+  // 头像
+  avatar: string;
+  // 手机号
+  phone: string;
+  // 创建时间
+  created_at: string;
+  // 电子邮箱
+  email: string;
 }

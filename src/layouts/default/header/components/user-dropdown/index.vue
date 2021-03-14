@@ -1,10 +1,10 @@
 <template>
   <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="headerImg" />
+      <img :class="`${prefixCls}__header`" :src="getUserInfo.avatar" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name  `" class="truncate">
-          {{ getUserInfo.realName }}
+          {{ getUserInfo.username }}
         </span>
       </span>
     </span>
@@ -73,8 +73,8 @@
       const { getShowDoc } = useHeaderSetting();
 
       const getUserInfo = computed(() => {
-        const { realName = '', desc } = userStore.getUserInfoState || {};
-        return { realName, desc };
+        const { username = '', desc, avatar } = userStore.getUserInfoState || {};
+        return { username, desc, avatar };
       });
 
       const [register, { openModal }] = useModal();

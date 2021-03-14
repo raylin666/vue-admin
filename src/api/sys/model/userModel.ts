@@ -40,4 +40,14 @@ export interface GetUserInfoByUserIdModel {
   real_username: string;
   // 介绍
   desc?: string;
+  // 头像
+  avatar: string;
+  // 手机号
+  phone: string;
+  // 手机区号
+  phone_area: string;
+  // 电子邮箱
+  email: string;
+  // 创建时间
+  created_at: string;
 }
