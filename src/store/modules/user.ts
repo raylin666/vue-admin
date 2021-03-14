@@ -88,13 +88,13 @@ class User extends VuexModule {
       const { goHome = true, mode, ...loginParams } = params;
       const data = await loginApi(loginParams, mode);
 
-      const { token, userId } = data;
+      const { token, uid } = data;
 
       // save token
       this.commitTokenState(token);
 
       // get user info
-      const userInfo = await this.getUserInfoAction({ userId });
+      const userInfo = await this.getUserInfoAction({ uid });
 
       goHome && (await router.replace(PageEnum.BASE_HOME));
       return userInfo;
@@ -104,10 +104,10 @@ class User extends VuexModule {
   }
 
   @Action
-  async getUserInfoAction({ userId }: GetUserInfoByUserIdParams) {
-    const userInfo = await getUserInfoById({ userId });
-    const { roles } = userInfo;
-    const roleList = roles.map((item) => item.value) as RoleEnum[];
+  async getUserInfoAction({ uid }: GetUserInfoByUserIdParams) {
+    const userInfo = await getUserInfoById({ uid });
+    const { role } = userInfo;
+    const roleList = role.map((item) => item.name) as RoleEnum[];
     this.commitUserInfoState(userInfo);
     this.commitRoleListState(roleList);
     return userInfo;

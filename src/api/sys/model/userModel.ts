@@ -10,34 +10,34 @@ export interface LoginParams {
  * @description: Get user information
  */
 export interface GetUserInfoByUserIdParams {
-  userId: string | number;
+  uid: string | number;
 }
 
 export interface RoleInfo {
-  roleName: string;
-  value: string;
+  name: string;
+  desc: string;
 }
 
 /**
  * @description: Login interface return value
  */
 export interface LoginResultModel {
-  userId: string | number;
+  uid: string | number;
   token: string;
-  role: RoleInfo;
+  role: RoleInfo[];
 }
 
 /**
  * @description: Get user information return value
  */
 export interface GetUserInfoByUserIdModel {
-  roles: RoleInfo[];
+  role: RoleInfo[];
   // 用户id
-  userId: string | number;
+  id: string | number;
   // 用户名
   username: string;
   // 真实名字
-  realName: string;
+  real_username: string;
   // 介绍
   desc?: string;
 }

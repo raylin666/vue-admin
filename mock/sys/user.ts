@@ -1,7 +1,7 @@
 import { MockMethod } from 'vite-plugin-mock';
 import { resultError, resultSuccess } from '../_util';
 
-function createFakeUserList() {
+/*function createFakeUserList() {
   return [
     {
       userId: '1',
@@ -32,7 +32,7 @@ function createFakeUserList() {
       ],
     },
   ];
-}
+}*/
 
 const fakeCodeList: any = {
   '1': ['1000', '3000', '5000'],
@@ -41,7 +41,7 @@ const fakeCodeList: any = {
 };
 export default [
   // mock user login
-  {
+  /*{
     url: '/api/login',
     timeout: 200,
     method: 'post',
@@ -63,8 +63,8 @@ export default [
         desc,
       });
     },
-  },
-  {
+  },*/
+  /*{
     url: '/api/getUserInfoById',
     method: 'get',
     response: ({ query }) => {
@@ -75,7 +75,7 @@ export default [
       }
       return resultSuccess(checkUser);
     },
-  },
+  },*/
   {
     url: '/api/getPermCodeByUserId',
     timeout: 200,

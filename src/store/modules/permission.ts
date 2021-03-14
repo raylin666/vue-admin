@@ -87,7 +87,6 @@ class Permission extends VuexModule {
     const { t } = useI18n();
     let routes: AppRouteRecordRaw[] = [];
     const roleList = toRaw(userStore.getRoleListState);
-
     const { permissionMode = PermissionModeEnum.ROLE } = appStore.getProjectConfig;
 
     // role permissions
@@ -105,7 +104,7 @@ class Permission extends VuexModule {
         duration: 1,
       });
       // Here to get the background routing menu logic to modify by yourself
-      const paramId = id || userStore.getUserInfoState.userId;
+      const paramId = id || userStore.getUserInfoState.id;
       if (!paramId) {
         throw new Error('paramId is undefined!');
       }

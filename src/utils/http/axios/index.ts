@@ -42,16 +42,16 @@ const transform: AxiosTransform = {
     }
     // 错误的时候返回
 
-    const { data } = res;
-    if (!data) {
+    const result = res.data;
+    if (!result) {
       // return '[HTTP] Request has no return value';
       return errorResult;
     }
-    //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data;
+    //  这里 code，data，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
+    const { code, data, message } = result;
 
     // 这里逻辑可以根据项目进行修改
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
+    const hasSuccess = result && Reflect.has(result, 'code') && code === ResultEnum.SUCCESS;
     if (!hasSuccess) {
       if (message) {
         // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
@@ -67,12 +67,11 @@ const transform: AxiosTransform = {
 
     // 接口请求成功，直接返回结果
     if (code === ResultEnum.SUCCESS) {
-      return result;
-    }
-    // 接口请求错误，统一提示错误信息
-    if (code === ResultEnum.ERROR) {
+      return data;
+    } else {
+      // 接口请求错误，统一提示错误信息
       if (message) {
-        createMessage.error(data.message);
+        createMessage.error(result.message);
         Promise.reject(new Error(message));
       } else {
         const msg = t('sys.api.errorMessage');
