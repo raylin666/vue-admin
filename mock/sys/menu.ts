@@ -13,6 +13,27 @@ const dashboardRoute = {
   },
 };
 
+const articleRoute = {
+  path: '/article',
+  name: 'Article',
+  component: 'LAYOUT',
+  redirect: '/article/list',
+  meta: {
+    icon: 'carbon:user-role',
+    title: 'routes.dashboard.article',
+  },
+  children: [
+    {
+      path: 'list',
+      name: 'ArticleList',
+      component: '/article/list',
+      meta: {
+        title: 'routes.article.lists',
+      },
+    },
+  ],
+};
+
 const frontRoute = {
   path: 'front',
   name: 'PermissionFrontDemo',
@@ -167,10 +188,10 @@ export default [
     response: ({ query }) => {
       const { id } = query;
       if (!id || id === '1') {
-        return resultSuccess([dashboardRoute, authRoute, levelRoute]);
+        return resultSuccess([dashboardRoute, articleRoute, authRoute, levelRoute]);
       }
       if (id === '2') {
-        return resultSuccess([dashboardRoute, authRoute1, levelRoute]);
+        return resultSuccess([dashboardRoute, articleRoute, authRoute1, levelRoute]);
       }
     },
   },
