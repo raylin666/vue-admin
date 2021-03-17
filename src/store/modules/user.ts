@@ -1,7 +1,6 @@
 import type {
   LoginParams,
-  GetUserInfoByUserIdModel,
-  GetUserInfoByUserIdParams,
+  GetUserInfoByUserIdModel
 } from '/@/api/sys/model/userModel';
 import type { UserInfo } from '/@/store/types';
 
@@ -94,7 +93,7 @@ class User extends VuexModule {
       this.commitTokenState(token);
 
       // get user info
-      const userInfo = await this.getUserInfoAction({ uid });
+      const userInfo = await this.getUserInfoAction(uid);
 
       goHome && (await router.replace(PageEnum.BASE_HOME));
       return userInfo;
@@ -104,8 +103,8 @@ class User extends VuexModule {
   }
 
   @Action
-  async getUserInfoAction({ uid }: GetUserInfoByUserIdParams) {
-    const userInfo = await getUserInfoById({ uid });
+  async getUserInfoAction(uid) {
+    const userInfo = await getUserInfoById(uid);
     const { role } = userInfo;
     const roleList = role.map((item) => item.name) as RoleEnum[];
     this.commitUserInfoState(userInfo);

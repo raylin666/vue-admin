@@ -25,36 +25,27 @@
   import { defineComponent } from 'vue';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
 
-  import { demoListApi } from '/@/api/demo/table';
+  import { ArticleList } from '/@/api/admin/article';
   const columns: BasicColumn[] = [
     {
       title: 'ID',
       dataIndex: 'id',
       fixed: 'left',
-      width: 280,
+      width: 100,
     },
     {
-      title: '姓名',
-      dataIndex: 'name',
-      width: 260,
+      title: '标题',
+      dataIndex: 'title',
+      width: 240,
     },
     {
-      title: '地址',
-      dataIndex: 'address',
-    },
-    {
-      title: '编号',
-      dataIndex: 'no',
-      width: 300,
-    },
-    {
-      title: '开始时间',
+      title: '发布时间',
       width: 200,
-      dataIndex: 'beginTime',
+      dataIndex: 'release_at',
     },
     {
-      title: '结束时间',
-      dataIndex: 'endTime',
+      title: '创建时间',
+      dataIndex: 'created_at',
       width: 200,
     },
   ];
@@ -62,10 +53,10 @@
     components: { BasicTable, TableAction },
     setup() {
       const [registerTable] = useTable({
-        title: 'TableAction组件及固定列示例',
-        api: demoListApi,
+        title: '',
+        api: ArticleList,
         columns: columns,
-        rowSelection: { type: 'radio' },
+        rowSelection: { type: 'checkbox' },
         bordered: true,
         actionColumn: {
           width: 160,

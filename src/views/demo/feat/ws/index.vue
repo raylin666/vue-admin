@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper title="WebSocket 示例">
+  <PageWrapper title="WebSocket 连接测试">
     <div class="flex">
       <div class="w-1/3 bg-white p-4">
         <div class="flex items-center">
@@ -70,7 +70,7 @@
     },
     setup() {
       const state = reactive({
-        server: 'ws://localhost:3380/test',
+        server: 'ws://localhost:9502/',
         sendValue: '',
         recordList: [] as { id: number; time: number; res: string }[],
       });
