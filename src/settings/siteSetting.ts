@@ -1,6 +1,6 @@
 // github repo url
-export const GITHUB_URL = 'https://github.com/anncwb/vue-vben-admin';
+export const GITHUB_URL = 'http://github.com/raylin/vue-admin';
 // vue-vben-admin-next-doc
-export const DOC_URL = 'https://vvbin.cn/doc-next/';
+export const DOC_URL = 'http://github.com/raylin/vue-admin';
 // site url
-export const SITE_URL = 'https://vvbin.cn/next/';
+export const SITE_URL = 'http://www.ls331.com/';
