@@ -50,7 +50,7 @@
         loading.value = true;
         setTimeout(() => {
           loading.value = false;
-          pagination.value = { pageSize: 20 };
+          pagination.value = { per_page: 20 };
         }, 3000);
       }
       function toggleBorder() {

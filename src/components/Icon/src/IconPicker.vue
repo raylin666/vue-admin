@@ -43,7 +43,7 @@
               <Pagination
                 showLessItems
                 size="small"
-                :pageSize="pageSize"
+                :per_page="per_page"
                 :total="getTotal"
                 @change="handlePageChange"
               />
@@ -96,7 +96,7 @@
     props: {
       value: propTypes.string,
       width: propTypes.string.def('100%'),
-      pageSize: propTypes.number.def(140),
+      per_page: propTypes.number.def(140),
       copy: propTypes.bool.def(false),
     },
     emits: ['change'],
@@ -113,7 +113,7 @@
 
       const { getPaginationList, getTotal, setCurrentPage } = usePagination(
         currentList,
-        props.pageSize
+        props.per_page
       );
 
       watchEffect(() => {

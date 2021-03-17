@@ -72,8 +72,8 @@ function handleIndexColumn(
       if (isBoolean(getPagination)) {
         return `${index + 1}`;
       }
-      const { current = 1, pageSize = PAGE_SIZE } = getPagination;
-      return ((current < 1 ? 1 : current) - 1) * pageSize + index + 1;
+      const { current = 1, per_page = PAGE_SIZE } = getPagination;
+      return ((current < 1 ? 1 : current) - 1) * per_page + index + 1;
     },
     ...(isFixedLeft
       ? {

@@ -111,8 +111,8 @@ export default [
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
-      const { page = 1, pageSize = 20 } = query;
-      return resultPageSuccess(page, pageSize, accountList);
+      const { page = 1, per_page = 20 } = query;
+      return resultPageSuccess(page, per_page, accountList);
     },
   },
   {
@@ -120,8 +120,8 @@ export default [
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
-      const { page = 1, pageSize = 20 } = query;
-      return resultPageSuccess(page, pageSize, roleList);
+      const { page = 1, per_page = 20 } = query;
+      return resultPageSuccess(page, per_page, roleList);
     },
   },
   {

@@ -170,13 +170,13 @@ export function useDataSource(
       const { pageField, sizeField, listField, totalField } = fetchSetting || FETCH_SETTING;
       let pageParams: Recordable = {};
 
-      const { current = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
+      const { current = 1, per_page = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
 
       if ((isBoolean(pagination) && !pagination) || isBoolean(getPaginationInfo)) {
         pageParams = {};
       } else {
         pageParams[pageField] = (opt && opt.page) || current;
-        pageParams[sizeField] = pageSize;
+        pageParams[sizeField] = per_page;
       }
 
       const { sortInfo = {}, filterInfo } = searchState;
@@ -204,7 +204,7 @@ export function useDataSource(
 
       // 假如数据变少，导致总页数变少并小于当前选中页码，通过getPaginationRef获取到的页码是不正确的，需获取正确的页码再次执行
       if (resultTotal) {
-        const currentTotalPage = Math.ceil(resultTotal / pageSize);
+        const currentTotalPage = Math.ceil(resultTotal / per_page);
         if (current > currentTotalPage) {
           setPagination({
             current: currentTotalPage,
