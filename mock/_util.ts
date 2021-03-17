@@ -11,11 +11,11 @@ export function resultSuccess<T = any>(data: T, { message = 'ok' } = {}) {
 
 export function resultPageSuccess<T = any>(
   page: number,
-  per_page: number,
+  pageSize: number,
   list: T[],
   { message = 'ok' } = {}
 ) {
-  const pageData = pagination(page, per_page, list);
+  const pageData = pagination(page, pageSize, list);
 
   return {
     ...resultSuccess({
@@ -35,11 +35,11 @@ export function resultError(message = 'Request failed', { code = -1, data = null
   };
 }
 
-export function pagination<T = any>(pageNo: number, per_page: number, array: T[]): T[] {
-  const offset = (pageNo - 1) * Number(per_page);
+export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]): T[] {
+  const offset = (pageNo - 1) * Number(pageSize);
   const ret =
-    offset + Number(per_page) >= array.length
+    offset + Number(pageSize) >= array.length
       ? array.slice(offset, array.length)
-      : array.slice(offset, offset + Number(per_page));
+      : array.slice(offset, offset + Number(pageSize));
   return ret;
 }

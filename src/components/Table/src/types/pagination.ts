@@ -42,7 +42,7 @@ export interface PaginationProps {
    * number of data items per page
    * @type number
    */
-  per_page?: number;
+  pageSize?: number;
 
   /**
    * Whether to hide pager on single page

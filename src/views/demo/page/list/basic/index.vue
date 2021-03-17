@@ -75,7 +75,7 @@
         list: cardList,
         pagination: {
           show: true,
-          per_page: 3,
+          pageSize: 3,
         },
       };
     },
