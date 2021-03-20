@@ -18,9 +18,9 @@ export default {
       totalField: 'total',
     },
     // Number of pages that can be selected
-    pageSizeOptions: ['20', '50', '80', '100'],
+    pageSizeOptions: ['15', '30', '45', '60'],
     // Default display quantity on one page
-    defaultPageSize: 20,
+    defaultPageSize: 15,
     // Custom general sort function
     defaultSortFn: (sortInfo: SorterResult) => {
       const { field, order } = sortInfo;

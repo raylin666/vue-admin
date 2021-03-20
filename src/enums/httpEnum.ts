@@ -4,6 +4,7 @@
 export enum ResultEnum {
   SUCCESS = 200,
   TIMEOUT = 401,
+  UNPROCESSABLE_ENTITY = 422,
 }
 
 /**

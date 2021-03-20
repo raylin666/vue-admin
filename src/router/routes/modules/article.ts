@@ -22,6 +22,33 @@ const article: AppRouteModule = {
         icon: 'bx:bx-home',
       },
     },
+    {
+      path: 'add',
+      name: 'ArticleAdd',
+      component: () => import('/@/views/article/add.vue'),
+      meta: {
+        title: t('routes.article.add'),
+        icon: 'bx:bx-home',
+      },
+    },
+    {
+      path: 'edit',
+      name: 'ArticleEdit',
+      component: () => import('/@/views/article/edit.vue'),
+      meta: {
+        title: t('routes.article.edit'),
+        icon: 'bx:bx-home',
+      },
+    },
+    {
+      path: 'category',
+      name: 'ArticleCategory',
+      component: () => import('/@/views/article/category.vue'),
+      meta: {
+        title: t('routes.article.category'),
+        icon: 'bx:bx-home',
+      },
+    },
   ],
 };
 

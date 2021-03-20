@@ -154,6 +154,15 @@ const transform: AxiosTransform = {
     const msg: string = response?.data?.error?.message ?? '';
     const err: string = error?.toString?.() ?? '';
     try {
+      if (response) {
+        // 验证数据返回错误提示信息
+        if (response.status == ResultEnum.UNPROCESSABLE_ENTITY) {
+          createMessage.error(response.data.data);
+        } else {
+          createMessage.error(response.data.msg);
+        }
+      }
+
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
         createMessage.error(t('sys.api.apiTimeoutMessage'));
       }

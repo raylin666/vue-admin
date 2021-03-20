@@ -11,6 +11,20 @@ const menu: MenuModule = {
         path: 'list',
         name: t('routes.article.lists'),
       },
+      {
+        path: 'add',
+        name: t('routes.article.add'),
+        hideMenu: true,
+      },
+      {
+        path: 'edit',
+        name: t('routes.article.edit'),
+        hideMenu: true,
+      },
+      {
+        path: 'category',
+        name: t('routes.article.category'),
+      },
     ],
   },
 };

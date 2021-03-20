@@ -42,6 +42,7 @@ export function setComponentRuleType(rule: ValidationRule, component: ComponentT
   }
 }
 
+// @ts-ignore
 export function handleInputNumberValue(component?: ComponentType, val: any) {
   if (!component) return val;
   if (['Input', 'InputPassword', 'InputSearch', 'InputTextArea'].includes(component)) {
