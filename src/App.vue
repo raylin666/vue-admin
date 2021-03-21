@@ -1,35 +1,51 @@
 <template>
-  <ConfigProvider v-bind="lockEvent" :locale="getAntdLocale">
+  <ConfigProvider
+    v-bind="lockEvent"
+    :locale="getAntdLocale"
+  >
     <AppProvider>
       <RouterView />
     </AppProvider>
   </ConfigProvider>
+
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { ConfigProvider } from 'ant-design-vue';
-  import { AppProvider } from '/@/components/Application';
+import { defineComponent, ref } from 'vue';
+import { ConfigProvider } from 'ant-design-vue';
+import { AppProvider } from '/@/components/Application';
 
-  import { initAppConfigStore } from '/@/logics/initAppConfig';
+import { initAppConfigStore } from '/@/logics/initAppConfig';
 
-  import { useLockPage } from '/@/hooks/web/useLockPage';
-  import { useLocale } from '/@/locales/useLocale';
+import { useLockPage } from '/@/hooks/web/useLockPage';
+import { useLocale } from '/@/locales/useLocale';
 
-  export default defineComponent({
-    name: 'App',
-    components: { ConfigProvider, AppProvider },
-    setup() {
-      // support Multi-language
-      const { getAntdLocale } = useLocale();
+import { useWatermark } from '/@/hooks/web/useWatermark';
 
-      // Initialize vuex internal system configuration
-      initAppConfigStore();
+export default defineComponent({
+  name: 'App',
+  components: { ConfigProvider, AppProvider },
+  setup() {
+    // support Multi-language
+    const { getAntdLocale } = useLocale();
 
-      // Create a lock screen monitor
-      const lockEvent = useLockPage();
+    // Initialize vuex internal system configuration
+    initAppConfigStore();
 
-      return { getAntdLocale, lockEvent };
-    },
-  });
+    // Create a lock screen monitor
+    const lockEvent = useLockPage();
+
+    // 水印
+    const areaRef = ref<Nullable<HTMLElement>>(null);
+    const { setWatermark } = useWatermark();
+    //setWatermark('linshan');
+
+    return {
+      getAntdLocale,
+      lockEvent,
+      areaRef,
+      setWatermark,
+    };
+  },
+});
 </script>

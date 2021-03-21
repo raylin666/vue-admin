@@ -157,10 +157,11 @@ const transform: AxiosTransform = {
       if (response) {
         // 验证数据返回错误提示信息
         if (response.status == ResultEnum.UNPROCESSABLE_ENTITY) {
-          createMessage.error(response.data.data);
-        } else {
-          createMessage.error(response.data.msg);
+            if (response.data.data) {
+                return createMessage.error(response.data.data);
+            }
         }
+        return createMessage.error(response.data.message);
       }
 
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {

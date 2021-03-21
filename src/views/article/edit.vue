@@ -1,197 +1,67 @@
 <template>
-  <PageWrapper title="表单校验示例">
-    <div class="mb-4">
-      <a-button @click="validateForm" class="mr-2"> 手动校验表单 </a-button>
-      <a-button @click="resetValidate" class="mr-2"> 清空校验信息 </a-button>
-      <a-button @click="getFormValues" class="mr-2"> 获取表单值 </a-button>
-      <a-button @click="setFormValues" class="mr-2"> 设置表单值 </a-button>
-    </div>
-    <CollapseContainer title="表单校验">
-      <BasicForm @register="register" @submit="handleSubmit" />
-    </CollapseContainer>
+  <PageWrapper
+    title="基础表单"
+    contentBackground
+    content=" 表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。"
+    contentClass="p-4"
+  >
+    <BasicForm @register="register" />
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
-  import { CollapseContainer } from '/@/components/Container/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { PageWrapper } from '/@/components/Page';
+import { BasicForm, useForm } from '/@/components/Form';
+import { defineComponent } from 'vue';
+import { schemas } from './articleFormData';
+import { useMessage } from '/@/hooks/web/useMessage';
+import { PageWrapper } from '/@/components/Page';
 
-  const schemas: FormSchema[] = [
-    {
-      field: 'field1',
-      component: 'Input',
-      label: '字段1',
-      colProps: {
-        span: 8,
+export default defineComponent({
+  components: { BasicForm, PageWrapper },
+  setup() {
+    const { createMessage } = useMessage();
+    const [register, { validate, setProps }] = useForm({
+      labelCol: {
+        span: 7,
       },
-      required: true,
-    },
-    {
-      field: 'field2',
-      component: 'Input',
-      label: '字段2',
-      colProps: {
-        span: 8,
+      wrapperCol: {
+        span: 10,
       },
-      required: true,
-    },
-    {
-      field: 'field3',
-      component: 'DatePicker',
-      label: '字段3',
-      colProps: {
-        span: 8,
+      schemas: schemas,
+      actionColOptions: {
+        offset: 8,
       },
-      required: true,
-    },
-    {
-      field: 'field4',
-      component: 'Select',
-      label: '字段4',
-      colProps: {
-        span: 8,
+      submitButtonOptions: {
+        text: '提交',
       },
-      componentProps: {
-        mode: 'multiple',
-        options: [
-          {
-            label: '选项1',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: '选项2',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-      rules: [
-        {
-          required: true,
-          message: '请输入aa',
-          type: 'array',
-        },
-      ],
-    },
-    {
-      field: 'field44',
-      component: 'Input',
-      label: '自定义校验',
-      colProps: {
-        span: 8,
-      },
-      rules: [
-        {
-          required: true,
-          // @ts-ignore
-          validator: async (rule, value) => {
-            if (!value) {
-              /* eslint-disable-next-line */
-              return Promise.reject('值不能为空');
-            }
-            if (value === '1') {
-              /* eslint-disable-next-line */
-              return Promise.reject('值不能为1');
-            }
-            return Promise.resolve();
-          },
-          trigger: 'change',
-        },
-      ],
-    },
-    {
-      field: 'field5',
-      component: 'CheckboxGroup',
-      label: '字段5',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: '选项1',
-            value: '1',
-          },
-          {
-            label: '选项2',
-            value: '2',
-          },
-        ],
-      },
-      rules: [{ required: true }],
-    },
-    {
-      field: 'field7',
-      component: 'RadioGroup',
-      label: '字段7',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: '选项1',
-            value: '1',
-          },
-          {
-            label: '选项2',
-            value: '2',
-          },
-        ],
-      },
-      rules: [{ required: true, message: '覆盖默认生成的校验信息' }],
-    },
-  ];
+      submitFunc: customSubmitFunc,
+    });
 
-  export default defineComponent({
-    components: { BasicForm, CollapseContainer, PageWrapper },
-    setup() {
-      const { createMessage } = useMessage();
-      const [register, { validateFields, clearValidate, getFieldsValue, setFieldsValue }] = useForm(
-        {
-          labelWidth: 120,
-          schemas,
-          actionColOptions: {
-            span: 24,
+    async function customSubmitFunc() {
+      try {
+        await validate();
+        setProps({
+          submitButtonOptions: {
+            loading: true,
           },
-        }
-      );
-      async function validateForm() {
-        try {
-          const res = await validateFields();
-          console.log('passing', res);
-        } catch (error) {
-          console.log('not passing', error);
-        }
-      }
-      async function resetValidate() {
-        clearValidate();
-      }
-      function getFormValues() {
-        const values = getFieldsValue();
-        createMessage.success('values:' + JSON.stringify(values));
-      }
-      function setFormValues() {
-        setFieldsValue({
-          field1: 1111,
-          field5: ['1'],
-          field7: '1',
         });
-      }
-      return {
-        register,
-        schemas,
-        handleSubmit: (values: any) => {
-          createMessage.success('click search,values:' + JSON.stringify(values));
-        },
-        getFormValues,
-        setFormValues,
-        validateForm,
-        resetValidate,
-      };
-    },
-  });
+        setTimeout(() => {
+          setProps({
+            submitButtonOptions: {
+              loading: false,
+            },
+          });
+          createMessage.success('提交成功！');
+        }, 2000);
+      } catch (error) {}
+    }
+
+    return { register };
+  },
+});
 </script>
+<style lang="less" scoped>
+.form-wrap {
+  padding: 24px;
+  background: #fff;
+}
+</style>

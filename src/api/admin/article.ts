@@ -14,6 +14,7 @@ enum Api {
   CATEGORY_STATUS = '/v1/article/category/status',
   CATEGORY_ADD = '/v1/article/category/add',
   CATEGORY_EDIT = '/v1/article/category/edit',
+  CATEGORY_DELETE = '/v1/article/category/delete',
 }
 
 export const ArticleList = (params: ArticleParams) =>
@@ -74,4 +75,11 @@ export function ArticleCategoryEdit (params: ArticleCategoryPostParams) {
   });
 }
 
-
+export function ArticleCategoryDelete (id) {
+  return defHttp.post({
+    url: Api.CATEGORY_DELETE + '/' + id,
+    headers: {
+      ignoreCancelToken: true,
+    }
+  });
+}

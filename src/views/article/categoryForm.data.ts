@@ -44,6 +44,14 @@ export const columns: BasicColumn[] = [
       return value ? '开启' : '关闭';
     },
   },
+  {
+    title: '文章数量',
+    width: 120,
+    dataIndex: 'article_count',
+    customRender: () => {
+      return 0;
+    }
+  },
 ];
 
 export const formSchema: FormSchema[] = [
