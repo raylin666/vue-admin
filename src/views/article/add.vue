@@ -62,6 +62,7 @@ import { PageWrapper } from '/@/components/Page';
 import { BasicUpload } from '/@/components/Upload';
 import { uploadApi } from '/@/api/sys/upload';
 import { Select } from 'ant-design-vue';
+import { ArticleAdd } from '/@/api/admin/article';
 
 export default defineComponent({
   components: {
@@ -76,7 +77,7 @@ export default defineComponent({
 
     const imageUploadAccept = ['png', 'jpg', 'jpeg', 'gif'];
 
-    const { createMessage } = useMessage();
+    const { createMessage, notification } = useMessage();
     const [register, { validate, setProps }] = useForm({
       labelCol: {
         span: 3,
@@ -102,11 +103,16 @@ export default defineComponent({
       console.log(`selected ${value}`);
     };
 
-    function handleUploadChange(list: string[]) {}
+    function handleUploadChange(list: string[]) {
+      console.log(list);
+      notification.success({
+        message: '操作完成',
+      });
+    }
 
     async function customSubmitFunc() {
       try {
-        await validate();
+        const values = await validate();
         setProps({
           submitButtonOptions: {
             loading: true,
@@ -118,6 +124,9 @@ export default defineComponent({
               loading: true,
             },
           });
+
+          ArticleAdd(values);
+
           createMessage.success('提交成功！');
         }, 2000);
       } catch (error) {}

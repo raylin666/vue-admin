@@ -1,5 +1,5 @@
 import { defHttp } from '/@/utils/http/axios';
-import { ArticleListGetResultModel, ArticleParams } from "../model/articleModel";
+import { ArticleListGetResultModel, ArticleParams, ArticlePostParams } from "../model/articleModel";
 import {BasicStatusParams} from "/@/api/model/Model";
 import {
   ArticleCategoryListGetResultModel,
@@ -9,6 +9,7 @@ import {
 
 enum Api {
   List = '/v1/article/list',
+  ADD = '/v1/article/add',
   STATUS = '/v1/article/status',
   CATEGORY = '/v1/article/category/list',
   CATEGORY_STATUS = '/v1/article/category/status',
@@ -25,6 +26,16 @@ export const ArticleList = (params: ArticleParams) =>
       ignoreCancelToken: true,
     },
   });
+
+export function ArticleAdd (params: ArticlePostParams) {
+  return defHttp.post({
+    url: Api.ADD,
+    params,
+    headers: {
+      ignoreCancelToken: true,
+    }
+  });
+}
 
 export function ArticleStatus (params: BasicStatusParams) {
   return defHttp.post({

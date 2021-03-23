@@ -32,7 +32,7 @@ export const schemas: FormSchema[] = [
     field: 'cover',
     component: 'Upload',
     label: '上传封面',
-    required: true,
+    rules: [{ required: true, message: '请选择上传文件' }],
     slot: 'cover',
   },
   {
@@ -55,20 +55,6 @@ export const schemas: FormSchema[] = [
       },
     },
   {
-    field: 'sort',
-    label: '分类排序',
-    component: 'InputNumber',
-    required: true,
-    defaultValue: 0,
-    colProps: {
-        span: 9,
-    },
-    itemProps: {
-        labelCol: {span: 4, offset: 4},
-        wrapperCol: {span: 6, offset: 3, style: {marginLeft: "11%"}},
-    }
-  },
-  {
     field: 'recommend_flag',
     component: 'RadioButtonGroup',
     label: '文章推荐标识',
@@ -84,9 +70,9 @@ export const schemas: FormSchema[] = [
         span: 9,
     },
     itemProps: {
-        labelCol: {span: 5},
-        wrapperCol: {span: 6, offset: 3},
-    }
+        labelCol: {span: 4, offset: 4},
+        wrapperCol: {span: 6, offset: 3, style: {marginLeft: "11%"}},
+    },
   },
   {
     field: 'comment_flag',
@@ -104,9 +90,9 @@ export const schemas: FormSchema[] = [
         span: 9,
     },
     itemProps: {
-        labelCol: {span: 6, offset: 2},
-        wrapperCol: {span: 6, offset: 3, style: {marginLeft: "11%"}},
-    }
+        labelCol: {span: 5},
+        wrapperCol: {span: 6, offset: 3},
+    },
   },
   {
     field: 'status',
@@ -124,9 +110,23 @@ export const schemas: FormSchema[] = [
         span: 9,
     },
     itemProps: {
+        labelCol: {span: 6, offset: 2},
+        wrapperCol: {span: 6, offset: 3, style: {marginLeft: "11%"}},
+    },
+  },
+  {
+    field: 'sort',
+    label: '分类排序',
+    component: 'InputNumber',
+    required: true,
+    defaultValue: 0,
+    colProps: {
+        span: 9,
+    },
+    itemProps: {
         labelCol: {span: 5},
         wrapperCol: {span: 6, offset: 3},
-    }
+    },
   },
   {
     field: 'release_time',
