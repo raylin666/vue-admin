@@ -81,12 +81,29 @@ export const formSchema: FormSchema[] = [
     label: '是否启用',
     component: 'Switch',
     defaultValue: false,
-    rules: [
-      {
-        required: true,
-        message: '请选择是否启用',
-        type: 'boolean',
-      },
-    ],
+  },
+];
+
+export const updateFormSchema: FormSchema[] = [
+  {
+    field: 'name',
+    label: '分类名称',
+    component: 'Input',
+    required: true,
+  },
+  {
+    field: 'pid',
+    label: '分类父级ID',
+    component: 'InputNumber',
+    required: true,
+    defaultValue: 0,
+    dynamicDisabled: true,
+  },
+  {
+    field: 'sort',
+    label: '分类排序',
+    component: 'InputNumber',
+    required: true,
+    defaultValue: 0,
   },
 ];

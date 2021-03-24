@@ -15,7 +15,6 @@ export type ArticlePostParams = {
     comment_flag: number;
     user_id: number;
     status: number;
-    release_time: number;
     source: string;
     source_url: string;
     content: string;
@@ -37,7 +36,6 @@ export interface ArticleListItem {
   publisher_username: string;
   user_id: number;
   last_comment_time: string;
-  release_at: string;
   created_at: string;
   updated_at: string;
   title: string;

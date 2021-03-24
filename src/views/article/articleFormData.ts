@@ -32,7 +32,7 @@ export const schemas: FormSchema[] = [
     field: 'cover',
     component: 'Upload',
     label: '上传封面',
-    rules: [{ required: true, message: '请选择上传文件' }],
+    rules: [{ required: false, message: '请选择上传文件'}],
     slot: 'cover',
   },
   {
@@ -70,7 +70,7 @@ export const schemas: FormSchema[] = [
         span: 9,
     },
     itemProps: {
-        labelCol: {span: 4, offset: 4},
+        labelCol: {span: 5, offset: 3},
         wrapperCol: {span: 6, offset: 3, style: {marginLeft: "11%"}},
     },
   },
@@ -90,8 +90,8 @@ export const schemas: FormSchema[] = [
         span: 9,
     },
     itemProps: {
-        labelCol: {span: 5},
-        wrapperCol: {span: 6, offset: 3},
+        labelCol: {span: 6},
+        wrapperCol: {span: 6, offset: 2},
     },
   },
   {
@@ -128,14 +128,14 @@ export const schemas: FormSchema[] = [
         wrapperCol: {span: 6, offset: 3},
     },
   },
-  {
-    field: 'release_time',
-    label: '发布时间',
-    component: 'DatePicker',
-    componentProps: {
-        format: 'YYYY-MM-DD h:mm',
-    },
-  },
+//   {
+//     field: 'release_time',
+//     label: '发布时间',
+//     component: 'DatePicker',
+//     componentProps: {
+//         format: 'YYYY-MM-DD h:mm',
+//     },
+//   },
   {
     field: 'keyword',
     component: 'Select',

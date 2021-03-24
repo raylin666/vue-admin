@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, unref } from 'vue';
 import { BasicForm, useForm } from '/@/components/Form/index';
-import { formSchema } from './categoryForm.data';
+import { formSchema, updateFormSchema } from './categoryForm.data';
 import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
 import { ArticleCategoryAdd, ArticleCategoryEdit } from '/@/api/admin/article';
 import { useMessage } from '/@/hooks/web/useMessage';
@@ -31,7 +31,7 @@ export default defineComponent({
     let id = 0;
 
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-      schemas: formSchema,
+      schemas: computed(() => (!unref(isUpdate) ? formSchema : updateFormSchema)),
       showActionButtonGroup: false,
     });
 

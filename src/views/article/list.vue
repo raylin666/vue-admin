@@ -110,11 +110,6 @@ const columns: BasicColumn[] = [
     },
   },
   {
-    title: '发布时间',
-    width: 180,
-    dataIndex: 'release_time',
-  },
-  {
     title: '创建|更新 时间',
     dataIndex: 'created_at',
     width: 180,
