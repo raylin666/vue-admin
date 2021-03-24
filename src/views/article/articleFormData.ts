@@ -32,7 +32,7 @@ export const schemas: FormSchema[] = [
     field: 'cover',
     component: 'Upload',
     label: '上传封面',
-    rules: [{ required: false, message: '请选择上传文件'}],
+    rules: [{ required: true, message: '请选择上传文件'}],
     slot: 'cover',
   },
   {

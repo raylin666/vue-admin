@@ -77,7 +77,7 @@ export default [
     },
   },*/
   {
-    url: '/api/getPermCodeByUserId',
+    url: '/basic-api/getPermCodeByUserId',
     timeout: 200,
     method: 'get',
     response: ({ query }) => {

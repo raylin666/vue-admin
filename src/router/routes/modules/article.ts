@@ -43,6 +43,7 @@ const article: AppRouteModule = {
     {
       path: 'category',
       name: 'ArticleCategory',
+
       component: () => import('/@/views/article/category.vue'),
       meta: {
         title: t('routes.article.category'),

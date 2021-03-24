@@ -4,7 +4,7 @@
     @register="registerDrawer"
     showFooter
     :title="getTitle"
-    height="60%"
+    :height="height"
     placement="bottom"
     @ok="handleSubmit"
   >
@@ -33,6 +33,7 @@ export default defineComponent({
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
       schemas: computed(() => (!unref(isUpdate) ? formSchema : updateFormSchema)),
       showActionButtonGroup: false,
+      baseColProps: {span: 16, offset: 4},
     });
 
     const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
@@ -53,6 +54,7 @@ export default defineComponent({
     });
 
     const getTitle = computed(() => (!unref(isUpdate) ? '新增分类' : '编辑分类'));
+    const height = computed(() => (!unref(isUpdate) ? '60%' : '50%'));
 
     async function handleSubmit() {
       try {
@@ -91,6 +93,7 @@ export default defineComponent({
       registerForm,
       getTitle,
       handleSubmit,
+      height,
     };
   },
 });

@@ -182,7 +182,7 @@ const levelRoute = {
 };
 export default [
   {
-    url: '/api/getMenuListById',
+    url: '/basic-api/getMenuListById',
     timeout: 1000,
     method: 'get',
     response: ({ query }) => {
