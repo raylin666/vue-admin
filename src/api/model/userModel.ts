@@ -25,7 +25,7 @@ export interface LoginResultModel {
 }
 
 /**
- * @description 用户角色信息
+ * @description: 用户角色信息
  */
 export interface RoleInfo {
   id: number;

@@ -159,7 +159,12 @@ const transform: AxiosTransform = {
             return createMessage.error(response.data.data);
           }
         }
-        return createMessage.error(response.data.message);
+
+        if (response.data.message) {
+          return createMessage.error(response.data.message);
+        }
+
+        return createMessage.error(response.data);
       }
 
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
