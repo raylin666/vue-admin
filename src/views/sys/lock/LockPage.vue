@@ -88,7 +88,6 @@
   import { useDesign } from '/@/hooks/web/useDesign';
 
   import { LockOutlined } from '@ant-design/icons-vue';
-  import headerImg from '/@/assets/images/header.jpg';
 
   export default defineComponent({
     name: 'LockPage',
@@ -107,8 +106,12 @@
       const { t } = useI18n();
 
       const realName = computed(() => {
-        const { realName } = userStore.getUserInfoState || {};
-        return realName;
+        const { real_username } = userStore.getUserInfoState || {};
+        return real_username;
+      });
+      const headerImg = computed(() => {
+        const { avatar } = userStore.getUserInfoState || {};
+        return avatar;
       });
 
       /**

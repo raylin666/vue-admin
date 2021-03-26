@@ -42,16 +42,16 @@ const transform: AxiosTransform = {
     }
     // 错误的时候返回
 
-    const { data } = res;
-    if (!data) {
+    const result = res.data;
+    if (!result) {
       // return '[HTTP] Request has no return value';
       return errorResult;
     }
-    //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data;
+    //  这里 code，data，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
+    const { code, data, message } = result;
 
     // 这里逻辑可以根据项目进行修改
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
+    const hasSuccess = result && Reflect.has(result, 'code') && code === ResultEnum.SUCCESS;
     if (!hasSuccess) {
       if (message) {
         // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
@@ -67,30 +67,27 @@ const transform: AxiosTransform = {
 
     // 接口请求成功，直接返回结果
     if (code === ResultEnum.SUCCESS) {
-      return result;
-    }
-    // 接口请求错误，统一提示错误信息
-    if (code === ResultEnum.ERROR) {
-      if (message) {
-        createMessage.error(data.message);
-        Promise.reject(new Error(message));
-      } else {
-        const msg = t('sys.api.errorMessage');
-        createMessage.error(msg);
-        Promise.reject(new Error(msg));
-      }
-      return errorResult;
-    }
-    // 登录超时
-    if (code === ResultEnum.TIMEOUT) {
+      return data;
+    } else if (code === ResultEnum.TIMEOUT) {
+      // 登录超时
       const timeoutMsg = t('sys.api.timeoutMessage');
       createErrorModal({
         title: t('sys.api.operationFailed'),
         content: timeoutMsg,
       });
       Promise.reject(new Error(timeoutMsg));
-      return errorResult;
+    } else {
+      // 接口请求错误，统一提示错误信息
+      if (message) {
+        createMessage.error(result.message);
+        Promise.reject(new Error(message));
+      } else {
+        const msg = t('sys.api.errorMessage');
+        createMessage.error(msg);
+        Promise.reject(new Error(msg));
+      }
     }
+
     return errorResult;
   },
 
@@ -155,6 +152,16 @@ const transform: AxiosTransform = {
     const msg: string = response?.data?.error?.message ?? '';
     const err: string = error?.toString?.() ?? '';
     try {
+      if (response) {
+        // 验证数据返回错误提示信息
+        if (response.status == ResultEnum.UNPROCESSABLE_ENTITY) {
+          if (response.data.data) {
+            return createMessage.error(response.data.data);
+          }
+        }
+        return createMessage.error(response.data.message);
+      }
+
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
         createMessage.error(t('sys.api.apiTimeoutMessage'));
       }

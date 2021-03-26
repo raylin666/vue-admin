@@ -4,7 +4,7 @@ import {
   LoginResultModel,
   GetUserInfoByUserIdParams,
   GetUserInfoByUserIdModel,
-} from './model/userModel';
+} from './model/userModel.bak';
 
 import { ErrorMessageMode } from '/@/utils/http/axios/types';
 

@@ -20,7 +20,6 @@ import { transformRouteToMenu } from '/@/router/helper/menuHelper';
 import { filter } from '/@/utils/helper/treeHelper';
 
 import { getMenuListById } from '/@/api/sys/menu';
-import { getPermCodeByUserId } from '/@/api/sys/user';
 
 import { useMessage } from '/@/hooks/web/useMessage';
 import { useI18n } from '/@/hooks/web/useI18n';
@@ -86,9 +85,11 @@ class Permission extends VuexModule {
   }
 
   @Action
-  async changePermissionCode(userId: string) {
-    const codeList = await getPermCodeByUserId({ userId });
-    this.commitPermCodeListState(codeList);
+  async changePermissionCode(uid: string) {
+    const fakeCodeList: any = {
+      '1': ['1000', '3000', '5000'],
+    };
+    this.commitPermCodeListState(fakeCodeList[uid]);
   }
 
   @Action
@@ -118,7 +119,7 @@ class Permission extends VuexModule {
         duration: 1,
       });
       // Here to get the background routing menu logic to modify by yourself
-      const paramId = id || userStore.getUserInfoState.userId;
+      const paramId = id || userStore.getUserInfoState.id;
 
       // !Simulate to obtain permission codes from the background,
       // this function may only need to be executed once, and the actual project can be put at the right time by itself

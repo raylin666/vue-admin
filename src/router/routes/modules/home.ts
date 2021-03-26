@@ -4,21 +4,21 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const dashboard: AppRouteModule = {
-  path: '/home',
-  name: 'Home',
+  path: '/',
+  name: '',
   component: LAYOUT,
-  redirect: '/home/welcome',
+  redirect: '/home',
   meta: {
     icon: 'ion:home-outline',
-    title: t('routes.dashboard.welcome'),
+    title: '',
   },
   children: [
     {
-      path: 'welcome',
-      name: 'Welcome',
-      component: () => import('/@/views/dashboard/welcome/index.vue'),
+      path: 'home',
+      name: 'Home',
+      component: () => import('/@/views/admin/home/index.vue'),
       meta: {
-        title: t('routes.dashboard.welcome'),
+        title: t('routes.home.index'),
         affix: true,
         icon: 'bx:bx-home',
       },

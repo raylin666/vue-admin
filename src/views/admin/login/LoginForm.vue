@@ -123,7 +123,7 @@
       const rememberMe = ref(false);
 
       const formData = reactive({
-        account: 'vben',
+        account: 'raylin',
         password: '123456',
       });
 
@@ -152,7 +152,7 @@
           if (userInfo) {
             notification.success({
               message: t('sys.login.loginSuccessTitle'),
-              description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+              description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.real_username}`,
               duration: 3,
             });
           }

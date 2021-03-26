@@ -33,7 +33,6 @@
 
   import { userStore } from '/@/store/modules/user';
   import { lockStore } from '/@/store/modules/lock';
-  import headerImg from '/@/assets/images/header.jpg';
   export default defineComponent({
     name: 'LockModal',
     components: { BasicModal, BasicForm },
@@ -43,7 +42,10 @@
       const { prefixCls } = useDesign('header-lock-modal');
 
       const getRealName = computed(() => {
-        return userStore.getUserInfoState?.realName;
+        return userStore.getUserInfoState?.real_username;
+      });
+      const headerImg = computed(() => {
+        return userStore.getUserInfoState?.avatar;
       });
       const [register, { closeModal }] = useModalInner();
 

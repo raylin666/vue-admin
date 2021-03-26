@@ -19,16 +19,16 @@
 </template>
 <script lang="ts">
   import { Button, Upload, Row, Col } from 'ant-design-vue';
-  import { defineComponent, onMounted } from 'vue';
+  import { computed, defineComponent, onMounted } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import Icon from '/@/components/Icon/index';
 
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import headerImg from '/@/assets/images/header.jpg';
   import { accountInfoApi } from '/@/api/demo/account';
   import { baseSetschemas } from './data';
+  import { userStore } from '/@/store/modules/user';
 
   export default defineComponent({
     components: {
@@ -52,6 +52,11 @@
       onMounted(async () => {
         const data = await accountInfoApi();
         setFieldsValue(data);
+      });
+
+      const headerImg = computed(() => {
+        const { avatar } = userStore.getUserInfoState || {};
+        return avatar;
       });
 
       return {

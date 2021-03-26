@@ -1,10 +1,10 @@
 <template>
   <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="headerImg" />
+      <img :class="`${prefixCls}__header`" :src="getUserInfo.avatar" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name  `" class="truncate">
-          {{ getUserInfo.realName }}
+          {{ getUserInfo.real_username }}
         </span>
       </span>
     </span>
@@ -47,7 +47,6 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useModal } from '/@/components/Modal';
 
-  import headerImg from '/@/assets/images/header.jpg';
   import { propTypes } from '/@/utils/propTypes';
   import { openWindow } from '/@/utils';
 
@@ -73,8 +72,8 @@
       const { getShowDoc } = useHeaderSetting();
 
       const getUserInfo = computed(() => {
-        const { realName = '', desc } = userStore.getUserInfoState || {};
-        return { realName, desc };
+        const { real_username = '', desc, avatar } = userStore.getUserInfoState || {};
+        return { real_username, desc, avatar };
       });
 
       const [register, { openModal }] = useModal();
@@ -113,7 +112,6 @@
         getUserInfo,
         handleMenuClick,
         getShowDoc,
-        headerImg,
         register,
       };
     },

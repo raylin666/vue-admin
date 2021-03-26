@@ -54,15 +54,15 @@
 
 <script lang="ts">
   import { Tag, Tabs, Row, Col } from 'ant-design-vue';
-  import { defineComponent } from 'vue';
+  import { computed, defineComponent } from 'vue';
   import { CollapseContainer } from '/@/components/Container/index';
   import Icon from '/@/components/Icon/index';
   import Article from './Article.vue';
   import Application from './Application.vue';
   import Project from './Project.vue';
 
-  import headerImg from '/@/assets/images/header.jpg';
   import { tags, teams, details, achieveList } from './data';
+  import { userStore } from '/@/store/modules/user';
 
   export default defineComponent({
     components: {
@@ -78,6 +78,11 @@
       [Col.name]: Col,
     },
     setup() {
+      const headerImg = computed(() => {
+        const { avatar } = userStore.getUserInfoState || {};
+        return avatar;
+      });
+
       return {
         prefixCls: 'account-center',
         headerImg,
