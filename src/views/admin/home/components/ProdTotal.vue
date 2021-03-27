@@ -14,10 +14,16 @@
   import { Row, Col } from 'ant-design-vue';
 
   import { wokbProd } from '../data';
+
+  import { info } from '/@/api/admin/common';
+
   // import {ProdTypeEnum} from '@/api/dashboard/model/wokbModel'
   export default defineComponent({
     components: { [Row.name]: Row, [Col.name]: Col },
     setup() {
+      info().then(function (res) {
+        console.log(res);
+      });
       return { wokbProd };
     },
   });

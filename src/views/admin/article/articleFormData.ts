@@ -2,6 +2,7 @@ import { FormSchema } from '/@/components/Form';
 import { h, computed } from 'vue';
 import { MarkDown } from '/@/components/Markdown';
 import { userStore } from '/@/store/modules/user';
+import { ArticleCategoryPid } from '/@/api/admin/article';
 
 const getUserInfo = computed(() => {
   const { username = '', id } = userStore.getUserInfoState || {};
@@ -31,8 +32,8 @@ export const schemas: FormSchema[] = [
   {
     field: 'cover',
     component: 'Upload',
-    label: '上传封面',
-    rules: [{ required: true, message: '请选择上传文件' }],
+    label: '上传封面 (必填)',
+    rules: [{ required: false, message: '请选择上传文件' }],
     slot: 'cover',
   },
   {
@@ -116,7 +117,7 @@ export const schemas: FormSchema[] = [
   },
   {
     field: 'sort',
-    label: '分类排序',
+    label: '文章排序',
     component: 'InputNumber',
     required: true,
     defaultValue: 0,
@@ -127,6 +128,22 @@ export const schemas: FormSchema[] = [
       labelCol: { span: 5 },
       wrapperCol: { span: 6, offset: 3 },
     },
+  },
+  {
+    field: 'category',
+    label: '文章分类',
+    component: 'ApiSelect',
+    rules: [{ required: true, message: '请选择文章所属分类', type: 'array' }],
+    dynamicRules: ({ values }) => {
+      return values.category
+        ? [{ required: true, message: '请选择文章所属分类', type: 'array' }]
+        : [];
+    },
+    componentProps: {
+      api: ArticleCategoryPid,
+      mode: 'multiple',
+    },
+    defaultValue: [],
   },
   //   {
   //     field: 'release_at',
@@ -142,6 +159,7 @@ export const schemas: FormSchema[] = [
     label: '文章关键词',
     subLabel: '( 选填 )',
     slot: 'keyword',
+    defaultValue: [],
   },
   {
     field: 'user_id',

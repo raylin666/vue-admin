@@ -36,7 +36,7 @@
     },
     inheritAttrs: false,
     props: {
-      value: propTypes.string,
+      value: propTypes.array,
       numberToString: propTypes.bool,
       api: {
         type: Function as PropType<(arg?: Recordable) => Promise<OptionsItem[]>>,
@@ -49,8 +49,8 @@
       },
       // support xxx.xxx.xx
       resultField: propTypes.string.def(''),
-      labelField: propTypes.string.def('label'),
-      valueField: propTypes.string.def('value'),
+      labelField: propTypes.string.def('name'),
+      valueField: propTypes.string.def('id'),
     },
     emits: ['options-change', 'change'],
     setup(props, { emit }) {

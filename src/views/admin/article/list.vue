@@ -11,9 +11,20 @@
         <TableAction
           :actions="[
             {
-              label: '编辑文章',
+              label: '编辑',
+              type: 'primary',
               icon: 'ant-design:edit-filled',
               onClick: handleEdit.bind(null, record),
+            },
+            {
+              label: '删除',
+              icon: 'ant-design:delete-outlined',
+              color: 'error',
+              type: 'primary',
+              popConfirm: {
+                title: '是否确认删除文章 ?',
+                confirm: handleDelete.bind(null, record),
+              },
             },
           ]"
         />
@@ -29,7 +40,7 @@
   import { defineComponent } from 'vue';
   import { BasicTable, useTable, BasicColumn, TableAction, TableImg } from '/@/components/Table';
 
-  import { ArticleList, ArticleStatus } from '/@/api/admin/article';
+  import { ArticleDelete, ArticleList, ArticleStatus } from '/@/api/admin/article';
   import router from '/@/router';
   import { h } from 'vue';
   import { notification, Tag } from 'ant-design-vue';
@@ -139,14 +150,14 @@
   export default defineComponent({
     components: { BasicTable, TableAction, TableImg },
     setup() {
-      const [registerTable] = useTable({
+      const [registerTable, { getDataSource, setTableData }] = useTable({
         title: '',
         api: ArticleList,
         columns: columns,
         bordered: true,
         actionColumn: {
-          width: 140,
-          title: '编辑文章',
+          width: 160,
+          title: '操作',
           dataIndex: 'action',
           slots: { customRender: 'action' },
         },
@@ -168,10 +179,24 @@
           });
         }
       }
+      async function handleDelete(record: Recordable) {
+        return ArticleDelete(record.id)
+          .then(function () {
+            let dataSource = getDataSource().filter((item) => item.id !== record.id);
+            setTableData(dataSource);
+
+            notification.success({
+              message: '系统通知',
+              description: '文章已完成删除',
+            });
+          })
+          .catch(function () {});
+      }
       return {
         registerTable,
         handleEdit,
         handleEditEnd,
+        handleDelete,
       };
     },
   });

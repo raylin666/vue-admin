@@ -21,11 +21,12 @@ export type ArticleRequestParams = {
   source: string;
   source_url: string;
   content: string;
-  keyword: string;
+  keyword: any;
   attachment_path: any;
+  category: any;
 };
 
-export interface ArticleListItem {
+export interface ArticleInfoItem {
   article_id: number;
   author: string;
   summary: string;
@@ -52,6 +53,11 @@ export interface ArticleListItem {
 }
 
 /**
+ * @description: 文章内容详情模型
+ */
+export type ArticleInfoModel = ArticleInfoItem;
+
+/**
  * @description: 文章列表数据模型
  */
-export type ArticleListResultModel = BasicFetchResult<ArticleListItem>;
+export type ArticleListResultModel = BasicFetchResult<ArticleInfoItem>;

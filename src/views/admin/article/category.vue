@@ -72,7 +72,7 @@
           isUpdate: true,
         });
       }
-      function handleDelete(record: Recordable) {
+      async function handleDelete(record: Recordable) {
         return ArticleCategoryDelete(record.id)
           .then(function () {
             let dataSource = getDataSource().filter((item) => item.id !== record.id);

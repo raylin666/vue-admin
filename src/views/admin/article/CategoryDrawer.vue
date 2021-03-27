@@ -53,7 +53,7 @@
         }
       });
 
-      const getTitle = computed(() => (!unref(isUpdate) ? '新增分类' : '编辑分类'));
+      const getTitle = computed(() => (!unref(isUpdate) ? '新 增 分 类' : '编 辑 分 类'));
       const height = computed(() => (!unref(isUpdate) ? '60%' : '50%'));
 
       async function handleSubmit() {

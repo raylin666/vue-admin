@@ -1,8 +1,4 @@
-import { BasicPageParams, BasicFetchResult } from './Model';
-/**
- * @description: 请求文章分类列表参数
- */
-export type ArticleCategoryListParams = BasicPageParams;
+import { BasicFetchResult } from './Model';
 
 /**
  * @description: 请求文章分类接口参数
@@ -30,3 +26,8 @@ export interface ArticleCategoryListItem {
  * @description: 文章分类数据模型
  */
 export type ArticleCategoryListResultModel = BasicFetchResult<ArticleCategoryListItem>;
+
+/**
+ * @description: 文章一级分类数据模型
+ */
+export type ArticleCategoryListPidResultModel = ArticleCategoryListItem[];

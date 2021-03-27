@@ -10,7 +10,7 @@
         <BasicUpload
           :maxSize="2"
           :maxNumber="1"
-          @change="handleUploadChange"
+          @change="handleUploadCoverChange"
           :emptyHidePreview="true"
           :api="uploadApi"
           :accept="imageUploadAccept"
@@ -23,7 +23,7 @@
         <BasicUpload
           :maxSize="20"
           :maxNumber="5"
-          @change="handleUploadChange"
+          @change="handleUploadAttachmentPathChange"
           :emptyHidePreview="true"
           :api="uploadApi"
           :multiple="true"
@@ -56,6 +56,8 @@
   import { BasicUpload } from '/@/components/Upload';
   import { uploadApi } from '/@/api/sys/upload';
   import { Select } from 'ant-design-vue';
+  import { ArticleAdd } from '/@/api/admin/article';
+  import router from '/@/router';
 
   export default defineComponent({
     components: {
@@ -90,29 +92,64 @@
         resetButtonOptions: {
           text: '重置文章',
         },
+        resetFunc: customResetFunc,
       });
 
+      let uploadCover = '';
+      let uploadAttachmentPath: string[] = [];
+      let keyword: string[] = [];
+
       const handleSelectChange = (value: string) => {
-        console.log(`selected ${value}`);
+        if (value) {
+          for (let i = 0; i < value.length; i++) {
+            keyword.push(value[i]);
+          }
+        } else {
+          keyword = [];
+        }
       };
 
-      function handleUploadChange(list: string[]) {
+      function handleUploadCoverChange(list: string[]) {
         if (list.length) {
-          createMessage.success({
-            message: '文件已上传完成',
-          });
+          uploadCover = list[0];
+          createMessage.success('文件已上传完成');
         } else {
-          createMessage.info({
-            message: '文件已删除完成',
-          });
+          uploadCover = '';
+          createMessage.info('文件已删除完成');
         }
       }
+
+      function handleUploadAttachmentPathChange(list: string[]) {
+        if (list.length) {
+          for (let i = 0; i < list.length; i++) {
+            uploadAttachmentPath.push(list[i]);
+          }
+          createMessage.success('文件已上传完成');
+        } else {
+          uploadAttachmentPath = [];
+          createMessage.info('文件已删除完成');
+        }
+      }
+
+      async function customResetFunc() {}
 
       async function customSubmitFunc() {
         try {
           const values = await validate();
+          if (uploadCover) {
+            values.cover = uploadCover;
+          } else {
+            return createMessage.error('请选择上传文章封面');
+          }
 
-          console.log(values);
+          if (uploadAttachmentPath) {
+            values.attachment_path = uploadAttachmentPath;
+          }
+
+          if (keyword) {
+            values.keyword = keyword;
+          }
+
           setProps({
             submitButtonOptions: {
               loading: true,
@@ -121,13 +158,14 @@
           setTimeout(() => {
             setProps({
               submitButtonOptions: {
-                loading: true,
+                loading: false,
               },
             });
 
-            // ArticleAdd(values);
-
-            createMessage.success('提交成功！');
+            return ArticleAdd(values).then(function () {
+              createMessage.success('提交成功！');
+              router.push('/article/list');
+            });
           }, 2000);
         } catch (error) {}
       }
@@ -135,11 +173,15 @@
       return {
         selectValue: ref([]),
         register,
-        handleUploadChange,
+        handleUploadCoverChange,
         uploadApi,
         handleSelectChange,
         defaultSelectOption,
         imageUploadAccept,
+        uploadCover,
+        uploadAttachmentPath,
+        handleUploadAttachmentPathChange,
+        keyword,
       };
     },
   });
