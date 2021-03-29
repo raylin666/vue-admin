@@ -2,7 +2,7 @@ import type { MenuModule } from '/@/router/types';
 import { t } from '/@/hooks/web/useI18n';
 
 const menu: MenuModule = {
-  orderNo: 20,
+  orderNo: 200,
   menu: {
     name: t('routes.demo.page.page'),
     path: '/page-demo',
