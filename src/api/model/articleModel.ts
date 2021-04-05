@@ -32,8 +32,8 @@ export interface ArticleInfoItem {
   summary: string;
   cover: string;
   sort: number;
-  recommend_flag: number;
-  comment_flag: number;
+  recommend_flag: string;
+  comment_flag: string;
   view_count: number;
   comment_count: number;
   share_count: number;

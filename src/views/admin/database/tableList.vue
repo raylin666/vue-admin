@@ -8,13 +8,13 @@
               label: '表结构',
               type: 'primary',
               icon: 'ant-design:insert-row-below-outlined',
-              onClick: tableInfo.bind(null, record),
+              onClick: getTableInfo.bind(null, record),
             },
             {
               label: 'DDL',
               type: 'primary',
               icon: 'ant-design:insert-row-below-outlined',
-              onClick: tableInfo.bind(null, record),
+              onClick: getTableInfo.bind(null, record),
             },
           ]"
         />
@@ -48,7 +48,7 @@
         },
       });
 
-      async function tableInfo(record: Recordable) {
+      async function getTableInfo(record: Recordable) {
         const content = await TableInfo(record.Database + '.' + record.Name);
         openDrawer(true, { content });
       }
@@ -60,8 +60,9 @@
       return {
         registerTable,
         registerDrawer,
-        tableInfo,
+        getTableInfo,
         handleSuccess,
+        TableListDrawer,
       };
     },
   });

@@ -16,6 +16,7 @@ enum Api {
   ArticleList = '/v1/article/list',
   ArticleInfo = '/v1/article/info',
   ArticleAdd = '/v1/article/add',
+  ArticleEdit = '/v1/article/edit',
   ArticleStatus = '/v1/article/status',
   ArticleDelete = '/v1/article/delete',
   ArticleCategory = '/v1/article/category/list',
@@ -44,14 +45,13 @@ export const ArticleList = (params: ArticleListParams) =>
  * @description: 文章内容详情
  * @param id
  */
-export const ArticleInfo = (id: number) => {
+export const ArticleInfo = (id: number) =>
   defHttp.get<ArticleInfoModel>({
     url: Api.ArticleInfo + '/' + id,
     headers: {
       ignoreCancelToken: true,
     },
   });
-};
 
 /**
  * @description: 新增文章
@@ -61,6 +61,21 @@ export const ArticleInfo = (id: number) => {
 export function ArticleAdd(params: ArticleRequestParams) {
   return defHttp.post({
     url: Api.ArticleAdd,
+    params,
+    headers: {
+      ignoreCancelToken: true,
+    },
+  });
+}
+
+/**
+ * @description: 修改文章
+ * @param params
+ * @returns
+ */
+export function ArticleEdit(params: ArticleRequestParams) {
+  return defHttp.post({
+    url: Api.ArticleEdit,
     params,
     headers: {
       ignoreCancelToken: true,

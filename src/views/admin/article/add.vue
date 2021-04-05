@@ -163,7 +163,7 @@
             });
 
             return ArticleAdd(values).then(function () {
-              createMessage.success('提交成功！');
+              createMessage.success('文章新增成功！');
               router.push('/article/list');
             });
           }, 2000);

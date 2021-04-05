@@ -11,6 +11,13 @@ const getUserInfo = computed(() => {
 
 export const schemas: FormSchema[] = [
   {
+    field: 'id',
+    component: 'Input',
+    label: '文章ID',
+    show: false,
+    defaultValue: 0,
+  },
+  {
     field: 'title',
     component: 'Input',
     label: '文章标题',

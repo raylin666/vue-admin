@@ -56,7 +56,7 @@
   import { BasicUpload } from '/@/components/Upload';
   import { uploadApi } from '/@/api/sys/upload';
   import { Select } from 'ant-design-vue';
-  import { ArticleAdd, ArticleInfo } from '/@/api/admin/article';
+  import { ArticleEdit, ArticleInfo } from '/@/api/admin/article';
   import router from '/@/router';
 
   export default defineComponent({
@@ -95,15 +95,32 @@
         resetFunc: customResetFunc,
       });
 
-      onMounted(async () => {
-        let a: any = router.currentRoute.value.query.id;
-        const data = await ArticleInfo(parseInt(a));
-        setFieldsValue(data);
-      });
-
+      let selectValue: any = ref([]);
       let uploadCover = '';
       let uploadAttachmentPath: string[] = [];
       let keyword: string[] = [];
+
+      onMounted(async () => {
+        let a: any = router.currentRoute.value.query.id;
+        const data = await ArticleInfo(parseInt(a));
+        data.recommend_flag = data.recommend_flag ? '1' : '0';
+        data.comment_flag = data.comment_flag ? '1' : '0';
+        let category: number[] = [];
+        if (data.category) {
+          for (var i = 0; i < data.category.length; i++) {
+            category[i] = data.category[i].id;
+          }
+          data.category = category;
+        }
+        if (data.keyword) {
+          selectValue.value = ref(data.keyword).value;
+          for (let i = 0; i < data.keyword.length; i++) {
+            keyword.push(data.keyword[i]);
+          }
+        }
+        console.log(data);
+        setFieldsValue(data);
+      });
 
       const handleSelectChange = (value: string) => {
         if (value) {
@@ -168,8 +185,8 @@
               },
             });
 
-            return ArticleAdd(values).then(function () {
-              createMessage.success('提交成功！');
+            return ArticleEdit(values).then(function () {
+              createMessage.success('文章保存成功！');
               router.push('/article/list');
             });
           }, 2000);
@@ -177,7 +194,7 @@
       }
 
       return {
-        selectValue: ref([]),
+        selectValue,
         register,
         handleUploadCoverChange,
         uploadApi,
