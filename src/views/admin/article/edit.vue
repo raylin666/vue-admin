@@ -16,6 +16,7 @@
           :accept="imageUploadAccept"
           :multiple="false"
           :uploadParams="{}"
+          :value="cover"
         />
       </template>
 
@@ -28,6 +29,7 @@
           :api="uploadApi"
           :multiple="true"
           :uploadParams="{}"
+          :value="uploadAttachmentPath"
         />
       </template>
 
@@ -97,6 +99,8 @@
 
       let selectValue: any = ref([]);
       let uploadCover = '';
+      let cover: any = ref([]);
+      let attachmentPath: any = ref([]);
       let uploadAttachmentPath: string[] = [];
       let keyword: string[] = [];
 
@@ -118,7 +122,13 @@
             keyword.push(data.keyword[i]);
           }
         }
-        console.log(data);
+        uploadCover = data.cover;
+        cover.value = ref([data.cover]).value;
+        for (let i = 0; i < data.attachment_path.length; i++) {
+          uploadAttachmentPath.push(data.attachment_path[i]);
+        }
+        attachmentPath.value = ref(uploadAttachmentPath).value;
+
         setFieldsValue(data);
       });
 
@@ -205,6 +215,8 @@
         uploadAttachmentPath,
         handleUploadAttachmentPathChange,
         keyword,
+        cover,
+        attachmentPath,
       };
     },
   });
