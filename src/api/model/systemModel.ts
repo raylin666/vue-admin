@@ -1,7 +1,7 @@
 /**
  * @description: 请求文章分类接口参数
  */
-export interface CommonInfoResultModel {
+export interface SystemInfoResultModel {
   system: SystemInfo;
   userCount: number;
   articleCount: number;

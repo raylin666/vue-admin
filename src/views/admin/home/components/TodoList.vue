@@ -1,32 +1,128 @@
 <template>
-  <CollapseContainer class="todo-list" title="待办事项" :canExpan="false">
+  <CollapseContainer class="todo-list" title="项目运行环境与服务器信息" :canExpan="false">
     <template #title>
-      <span> 待办事项 <span class="todo-list__total">30</span> </span>
+      <span> 项目运行环境与服务器信息 <span class="todo-list__total">30</span> </span>
     </template>
 
+    <hr />
+
     <List>
-      <template v-for="item in todoList" :key="item.id">
-        <ListItem class="todo-list__item">
-          <ListItemMeta>
-            <template #title>
-              <div>
-                <span class="todo-list__item-title">{{ item.title }}</span>
-                <span class="todo-list__item-memo">{{ item.memo }}</span>
-              </div>
-            </template>
-            <template #description>
-              <div class="todo-list__item-desc">
-                提交人：{{ item.sbmter }}
-                <br />
-                提交时间：{{ item.sbmtTime }}
-              </div>
-            </template>
-          </ListItemMeta>
-          <a-button type="link">
-            <Tag color="blue"> 待审批 </Tag>
-          </a-button>
-        </ListItem>
-      </template>
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> 项目名称 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.projectName }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> PHP运行方式 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.phpSapiName }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> PHP 版本 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.phpVersion }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> Swoole 版本 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.swooleVersion }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> 服务框架 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.serverFramework }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> UI 框架 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.ui }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> 服务器时间 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.serverTime }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> 当前程序的所有者名称 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.user }}
+          </div>
+        </a-button>
+      </ListItem>
+
+      <ListItem class="todo-list__item">
+        <ListItemMeta>
+          <template #title>
+            <div style="color: rgb(109 109 109)"> 系统类型及版本号 </div>
+          </template>
+        </ListItemMeta>
+        <a-button type="link">
+          <div style="color: #494971" v-if="isShow">
+            {{ sysInfo.system.phpUname }}
+          </div>
+        </a-button>
+      </ListItem>
     </List>
     <div class="todo-list__all">
       <Tooltip placement="topRight">
@@ -37,12 +133,11 @@
   </CollapseContainer>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
   import { List, Tag, Tooltip } from 'ant-design-vue';
   import { CollapseContainer } from '/@/components/Container/index';
 
   import { EllipsisOutlined } from '@ant-design/icons-vue';
-  import { todoList } from '../data';
 
   export default defineComponent({
     name: 'TodoList',
@@ -55,8 +150,30 @@
       Tooltip,
       EllipsisOutlined,
     },
+    props: {
+      datas: {
+        type: Object,
+        default: null,
+      },
+    },
+    watch: {
+      datas: {
+        deep: true, // 深度监听
+        handler(newVal) {
+          this.sysInfo = newVal;
+          this.isShow = true;
+        },
+      },
+    },
     setup() {
-      return { todoList };
+      const isShow = ref(false);
+
+      const sysInfo = ref<any>({});
+
+      return {
+        sysInfo,
+        isShow,
+      };
     },
   });
 </script>
