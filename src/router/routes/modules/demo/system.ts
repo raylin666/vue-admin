@@ -4,10 +4,10 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const system: AppRouteModule = {
-  path: '/system',
-  name: 'System',
+  path: '/system_test',
+  name: 'SystemTest',
   component: LAYOUT,
-  redirect: '/system/account',
+  redirect: '/system_test/account',
   meta: {
     icon: 'ion:settings-outline',
     title: t('routes.demo.system.moduleName'),

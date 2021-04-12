@@ -5,13 +5,13 @@ export const columns: BasicColumn[] = [
   {
     title: '表名',
     dataIndex: 'Name',
-    width: 260,
+    width: 250,
     fixed: 'left',
   },
   {
     title: '数据库',
     dataIndex: 'Database',
-    width: 120,
+    width: 100,
   },
   {
     title: '表存储引擎',
@@ -26,15 +26,15 @@ export const columns: BasicColumn[] = [
   {
     title: '表数据量',
     dataIndex: 'Data_length',
-    width: 140,
+    width: 120,
     customRender: ({ record }) => {
       return bytesToSize(record.Data_length);
     },
   },
   {
-    title: '索引占用磁盘空间',
+    title: '索引空间',
     dataIndex: 'Index_length',
-    width: 140,
+    width: 120,
     customRender: ({ record }) => {
       return bytesToSize(record.Index_length);
     },
@@ -42,7 +42,7 @@ export const columns: BasicColumn[] = [
   {
     title: '行格式',
     dataIndex: 'Row_format',
-    width: 120,
+    width: 80,
   },
   {
     title: '下个自增值',
@@ -50,7 +50,7 @@ export const columns: BasicColumn[] = [
     width: 120,
   },
   {
-    title: '字符集和字符排序',
+    title: '字符集',
     dataIndex: 'Collation',
     width: 160,
   },
@@ -70,6 +70,6 @@ export const columns: BasicColumn[] = [
   {
     title: '版本',
     dataIndex: 'Version',
-    width: 180,
+    width: 70,
   },
 ];

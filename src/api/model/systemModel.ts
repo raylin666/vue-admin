@@ -5,6 +5,15 @@ export interface SystemInfoResultModel {
   system: SystemInfo;
   userCount: number;
   articleCount: number;
+  cpuPercent: string;
+  memPercent: string;
+  diskPercent: string;
+  cpuGHz: string;
+  cpuCounts: number;
+  memTotal: string;
+  memUsed: string;
+  diskTotal: string;
+  diskUsed: string;
 }
 
 /**

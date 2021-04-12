@@ -5,7 +5,7 @@ const menu: MenuModule = {
   orderNo: 2000,
   menu: {
     name: t('routes.demo.system.moduleName'),
-    path: '/system',
+    path: '/system_test',
     tag: {
       content: 'new',
     },

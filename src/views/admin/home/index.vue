@@ -13,17 +13,17 @@
         <a-row class="mt-3">
           <a-col :md="24" :lg="8" class="product-total">
             <CollapseContainer class="mr-3" title="CPU使用率" :canExpan="false">
-              <SysA />
+              <SysA :datas="sysInfo" />
             </CollapseContainer>
           </a-col>
           <a-col :md="24" :lg="8">
             <CollapseContainer class="mr-3" title="内存使用率" :canExpan="false">
-              <SysB />
+              <SysB :datas="sysInfo" />
             </CollapseContainer>
           </a-col>
           <a-col :md="24" :lg="8">
             <CollapseContainer class="mr-3" title="磁盘信息" :canExpan="false">
-              <SysC />
+              <SysC :datas="sysInfo" />
             </CollapseContainer>
           </a-col>
         </a-row>

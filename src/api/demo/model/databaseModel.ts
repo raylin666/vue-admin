@@ -23,4 +23,6 @@ export interface DatabaseTableListModel {
 export interface DatabaseTableInfoModel {
   TableName: string;
   CreateTable: string;
+  Columns: any;
+  Index: any;
 }
