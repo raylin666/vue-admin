@@ -1,4 +1,4 @@
-import { LogsTableListModel } from '../demo/model/logsModel';
+import { SystemLogsResultModel, SystemLogsParams } from '../demo/model/logsModel';
 import { defHttp } from '/@/utils/http/axios';
 
 enum Api {
@@ -8,8 +8,12 @@ enum Api {
 /**
  * @description: 获取系统日志接口
  */
-export function getSystemLogs() {
-  return defHttp.get<LogsTableListModel>({
+export function getSystemLogs(params: SystemLogsParams) {
+  return defHttp.get<SystemLogsResultModel>({
     url: Api.SystemLogs,
+    params,
+    headers: {
+      ignoreCancelToken: true,
+    },
   });
 }

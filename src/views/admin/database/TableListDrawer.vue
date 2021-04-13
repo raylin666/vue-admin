@@ -18,7 +18,7 @@
         color: #1d2d67;
       "
     >
-      <pre> {{ content.CreateTable }} </pre>
+      <pre> {{ content.CreateTable }} <br /> </pre>
     </div>
 
     <div v-if="isColumn" class="h-20">

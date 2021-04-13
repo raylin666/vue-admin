@@ -41,7 +41,7 @@ export const columns: BasicColumn[] = [
   {
     title: '请求域名',
     dataIndex: 'host',
-    width: 180,
+    width: 200,
     customRender: ({ record }) => {
       return record.host + ':' + record.port;
     },
@@ -57,7 +57,7 @@ export const columns: BasicColumn[] = [
   {
     title: '请求路径',
     dataIndex: 'path',
-    width: 240,
+    width: 400,
   },
   {
     title: '请求参数',
@@ -67,7 +67,7 @@ export const columns: BasicColumn[] = [
   {
     title: '操作方法',
     dataIndex: 'operation_method',
-    width: 300,
+    width: 400,
   },
   {
     title: '操作描述',
