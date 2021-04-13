@@ -1,0 +1,1 @@
+import{bg as s,bh as b}from"./index.47b6c2b9.js";const o=s((()=>b((()=>__import__("./index.fdb1357a.js")),["/assets/index.fdb1357a.js","/assets/index.47b6c2b9.js","/assets/index.d16052dc.css","/assets/vendor.62a151c9.js","/assets/vendor.4a5fa02d.css"])));export{o as C};

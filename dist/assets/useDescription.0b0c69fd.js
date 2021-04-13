@@ -1,0 +1,1 @@
+import{ao as s,q as e,w as n,d8 as t}from"./index.47b6c2b9.js";function o(o){if(!s())throw new Error("Please put useDescription function in the setup function!");const r=e(null),u=e(!1);return[function(s){n(u)&&t()||(r.value=s,o&&s.setDescProps(o),u.value=!0)},{setDescProps:s=>{var e;null==(e=n(r))||e.setDescProps(s)}}]}export{o as u};

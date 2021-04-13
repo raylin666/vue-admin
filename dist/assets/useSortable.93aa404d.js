@@ -1,0 +1,1 @@
+var a=Object.assign;import{O as t,bh as e,w as n}from"./index.47b6c2b9.js";function i(i,r){return{initSortable:function(){t((async()=>{if(!i)return;(await e((()=>__import__("./sortable.esm.c87c7eb9.js")),void 0)).default.create(n(i),a({animation:500,delay:400,delayOnTouchOnly:!0},r))}))}}}export{i as u};
