@@ -1,0 +1,1 @@
+import{e as r,cJ as e,eg as s}from"./index.0c6f5acb.js";var t=r({name:"Authority",props:{value:{type:[Number,Array,String],default:""}},setup(r,{slots:t}){const{hasPermission:a}=s();return()=>function(){const{value:s}=r;return s?a(s)?e(t):null:e(t)}()}});export{t as _};
